@@ -1,6 +1,7 @@
 package com.robelseyoum3.safetonet.viewmodel
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations.map
 import androidx.lifecycle.ViewModel
 import com.robelseyoum3.safetonet.model.Rockets
 import com.robelseyoum3.safetonet.repository.GetDataRepositoryImpl
@@ -24,10 +25,10 @@ class RocketViewModel (private val getDataRepositoryImpl: GetDataRepositoryImpl)
             getDataRepositoryImpl.getRocketRepositoriesMethod()
                 .doOnSubscribe { progressbarMutableData.postValue(true) }
                 .doOnError { progressbarMutableData.value = false }
+                .map { it -> it.filter { it.active } }
                 .subscribe(
                     {
-                        rockets ->
-                        allRocketsMutableData.value = rockets
+                        rockets -> allRocketsMutableData.value = rockets
                         progressbarMutableData.value = false
                     },
                     {

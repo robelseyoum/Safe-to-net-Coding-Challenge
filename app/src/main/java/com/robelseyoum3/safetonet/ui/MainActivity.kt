@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         //show welcome dialogue box for the first time user
-        checkFirstTimeOpended()
+        checkFirstTimeOpened()
 
         //getting swipeRefreshLayout from xml
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout)
@@ -84,17 +84,14 @@ class MainActivity : AppCompatActivity() {
         swipeRefreshLayout.setOnRefreshListener {
 
             viewModel.getAllRocketsData()
-
             Toast.makeText(this, "Swipe called", Toast.LENGTH_SHORT).show()
-
             swipeRefreshLayout.isRefreshing = false
-
         }
 
 
     }
 
-    private fun checkFirstTimeOpended() {
+    private fun checkFirstTimeOpened() {
         val pref =  getSharedPreferences(Constant.PREFS_NAME,0)
         val editor = pref.edit()
         val firstRun = pref.getBoolean(Constant.FIRST_RUN, true)
