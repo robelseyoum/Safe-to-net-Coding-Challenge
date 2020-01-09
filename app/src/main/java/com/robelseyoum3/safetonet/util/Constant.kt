@@ -4,6 +4,8 @@ class Constant {
 
     companion object {
 
-        const val BASE_URL = "https://api.spacexdata.com/v3/rockets"
+        const val BASE_URL = "https://api.spacexdata.com/"
+        const val ENDPOINT_URL  = "v3/rockets/"
+
     }
 }
