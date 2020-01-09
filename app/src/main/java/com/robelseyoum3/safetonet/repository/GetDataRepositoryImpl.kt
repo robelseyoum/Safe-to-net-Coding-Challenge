@@ -14,4 +14,4 @@ class GetDataRepositoryImpl (private val webServices: WebServices) : Repository 
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
-}1lsjdf
+}
