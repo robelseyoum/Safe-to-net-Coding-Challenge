@@ -19,7 +19,7 @@ data class Engines(
     @SerializedName("thrust_sea_level")
     val thrustSeaLevel: ThrustSeaLevel,
     @SerializedName("thrust_to_weight")
-    val thrustToWeight: Int,
+    val thrustToWeight: Double,
     @SerializedName("thrust_vacuum")
     val thrustVacuum: ThrustVacuum,
     @SerializedName("type")

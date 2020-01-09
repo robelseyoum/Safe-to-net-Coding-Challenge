@@ -61,9 +61,7 @@ class MainActivity : AppCompatActivity() {
         })
 
 
-
     }
-
 
     private fun allRocketAdapter(t: List<Rockets>) {
 

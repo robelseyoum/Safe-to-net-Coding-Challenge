@@ -31,7 +31,7 @@ class RocketViewModel (private val getDataRepositoryImpl: GetDataRepositoryImpl)
                         progressbarMutableData.value = false
                     },
                     {
-                        errorMutableData.value = false
+                        errorMutableData.value = true
                     }
                 )
         )

@@ -3,7 +3,6 @@ package com.robelseyoum3.safetonet.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.robelseyoum3.safetonet.R
@@ -21,17 +20,20 @@ class RocketAdaptor(private val allRocket: List<Rockets>) : RecyclerView.Adapter
     }
 
     override fun onBindViewHolder(holder: RocketViewHolder, position: Int) {
+
         holder.rocketName.text = allRocket[position].rocketName
         holder.rocketCountry.text = allRocket[position].country
         holder.rocketEngineCount.text = allRocket[position].engines.number.toString() //not sure with the request data
+
     }
 
 
-    class RocketViewHolder (view: View): RecyclerView.ViewHolder(view){
+    class RocketViewHolder (view: View): RecyclerView.ViewHolder(view) {
 
         val rocketName: TextView = view.tvDisplayName
         val rocketCountry: TextView = view.tvDisplayCountry
-        val rocketEngineCount: TextView = view.tvEnginCountDesplay
+        val rocketEngineCount: TextView = view.tvEngineCountDisplay
+
     }
 
 }
