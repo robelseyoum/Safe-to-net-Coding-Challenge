@@ -2,4 +2,7 @@
     <string name="app_name">Safe to Net Coding Challenge</string>
     <string name="retry">Retry</string>
     <string name="error_message">Something went wrong</string>
+
+    <string name="dialog_title">Safe to Net</string>
+    <string name="dialog_message">Welcome to Safe to Net</string>
 </resources>
