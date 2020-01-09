@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         //show welcome dialogue box for the first time user
-        checkFirstTime()
+        checkFirstTimeOpended()
 
         //getting swipeRefreshLayout from xml
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout)
@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun checkFirstTime() {
+    private fun checkFirstTimeOpended() {
         val pref =  getSharedPreferences(Constant.PREFS_NAME,0)
         val editor = pref.edit()
         val firstRun = pref.getBoolean(Constant.FIRST_RUN, true)
