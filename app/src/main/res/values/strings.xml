@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">safetonet</string>
+    <string name="app_name">Safe to Net</string>
+    <string name="retry">Retry</string>
+    <string name="error_message">Something went wrong</string>
 </resources>
