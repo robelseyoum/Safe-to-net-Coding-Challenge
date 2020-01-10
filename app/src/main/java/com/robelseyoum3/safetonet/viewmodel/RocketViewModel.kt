@@ -23,6 +23,7 @@ class RocketViewModel (private val getDataRepositoryImpl: GetDataRepositoryImpl)
 
 
         compositeDisposable.add(
+
             getDataRepositoryImpl.getRocketRepositoriesMethod()
                 .doOnSubscribe { progressbarMutableData.postValue(true) }
                 .doOnError { progressbarMutableData.value = false }
