@@ -21,6 +21,7 @@ class RocketViewModel (private val getDataRepositoryImpl: GetDataRepositoryImpl)
 
     fun getAllRocketsData() {
 
+
         compositeDisposable.add(
             getDataRepositoryImpl.getRocketRepositoriesMethod()
                 .doOnSubscribe { progressbarMutableData.postValue(true) }
@@ -49,6 +50,8 @@ class RocketViewModel (private val getDataRepositoryImpl: GetDataRepositoryImpl)
         super.onCleared()
         compositeDisposable.clear()
     }
+
+
 
 
 }
