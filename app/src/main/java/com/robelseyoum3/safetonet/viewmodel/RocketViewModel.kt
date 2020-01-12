@@ -5,9 +5,10 @@ import androidx.lifecycle.Transformations.map
 import androidx.lifecycle.ViewModel
 import com.robelseyoum3.safetonet.model.Rockets
 import com.robelseyoum3.safetonet.repository.GetDataRepositoryImpl
+import com.robelseyoum3.safetonet.repository.Repository
 import io.reactivex.disposables.CompositeDisposable
 
-class RocketViewModel (private val getDataRepositoryImpl: GetDataRepositoryImpl) : ViewModel() {
+class RocketViewModel (private val repository: Repository) : ViewModel() {
 
 
     private var allRocketsMutableData: MutableLiveData<List<Rockets>> = MutableLiveData()
@@ -24,7 +25,7 @@ class RocketViewModel (private val getDataRepositoryImpl: GetDataRepositoryImpl)
 
         compositeDisposable.add(
 
-            getDataRepositoryImpl.getRocketRepositoriesMethod()
+            repository.getRocketRepositoriesMethod()
                 .doOnSubscribe { progressbarMutableData.postValue(true) }
                 .doOnError { progressbarMutableData.value = false }
                 .map { it -> it.filter { it.active } }

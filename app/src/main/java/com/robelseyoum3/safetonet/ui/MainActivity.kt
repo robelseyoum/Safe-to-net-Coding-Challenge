@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var rocketViewModelFactory: RocketViewModelFactory
-    lateinit var viewModel: RocketViewModel
+    private lateinit var viewModel: RocketViewModel
 
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
@@ -38,28 +38,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //show welcome dialogue box for the first time user
         checkFirstTimeOpened()
 
-        //getting swipeRefreshLayout from xml
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout)
 
-        //for dependency injection
         getDependencies()
 
-        //creating ViewModel variable for referencing the ViewModel methods
         viewModel = ViewModelProviders.of(this, rocketViewModelFactory).get(RocketViewModel::class.java)
 
-        //fetching rocket data from web
         viewModel.getAllRocketsData()
 
-        //display the rocket data on RecycleView through adaptor
         viewModel.returnAllRocketsResult().observe(this,
             Observer<List<Rockets>> {
-                    t ->  allRocketAdapter(t)
+                    rocket ->  allRocketAdapter(rocket)
             })
 
-        //checking error while fetching and displaying data
         viewModel.returnError().observe(this, Observer {
 
             if(it == true) {
@@ -70,7 +63,7 @@ class MainActivity : AppCompatActivity() {
 
         })
 
-        //showing the progressbar before the data displayed
+
         viewModel.returnProgressBarValue().observe(this, Observer {
 
             if (it == true){
@@ -80,7 +73,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        //Here refreshing the page, when user swiping
         swipeRefreshLayout.setOnRefreshListener {
 
             viewModel.getAllRocketsData()
@@ -88,6 +80,9 @@ class MainActivity : AppCompatActivity() {
             swipeRefreshLayout.isRefreshing = false
         }
 
+        btnRetry.setOnClickListener {
+            viewModel.getAllRocketsData()
+        }
 
     }
 
@@ -99,8 +94,6 @@ class MainActivity : AppCompatActivity() {
         if(firstRun){
             editor.putBoolean(Constant.FIRST_RUN, false)
             editor.apply()
-            // Log.i("MainActivity", "This is a first Run")
-            //here we will display a welcome page
             showWelcomeDialogue()
         }
     }
@@ -111,10 +104,9 @@ class MainActivity : AppCompatActivity() {
         with(builder)
         {
             setTitle(R.string.dialog_title)
-            setMessage(R.string.dialog_message) //hard coded
-            setNegativeButton("OK", DialogInterface.OnClickListener{
-                    dialog, with -> dialog.dismiss()
-            })
+            setMessage(R.string.dialog_message)
+            setNegativeButton("OK") { dialog, _ -> dialog.dismiss()
+            }
             show()
         }
     }

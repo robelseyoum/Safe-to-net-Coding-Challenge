@@ -5,4 +5,9 @@
 
     <string name="dialog_title">Safe to Net</string>
     <string name="dialog_message">Welcome to Safe to Net</string>
+    <string name="engine_count">Engine Count</string>
+    <string name="name">Name</string>
+    <string name="country">Country</string>
+
+
 </resources>

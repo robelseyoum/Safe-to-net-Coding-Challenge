@@ -6,7 +6,7 @@ import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.robelseyoum3.safetonet.model.Engines
 import com.robelseyoum3.safetonet.model.Rockets
-import com.robelseyoum3.safetonet.repository.GetDataRepositoryImpl
+import com.robelseyoum3.safetonet.repository.Repository
 import com.robelseyoum3.safetonet.viewmodel.RocketViewModel
 import io.reactivex.Single
 import org.junit.Before
@@ -17,11 +17,9 @@ import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
-import org.mockito.Mockito.mock
 import org.mockito.junit.MockitoJUnitRunner
 import java.lang.RuntimeException
 
-//BockJUnit4ClassRunner::class
 @RunWith(MockitoJUnitRunner::class)
 class RocketsViewModelTest {
 
@@ -30,7 +28,7 @@ class RocketsViewModelTest {
     var testRule: TestRule = InstantTaskExecutorRule()
 
     @Mock
-    lateinit var getDataRepositoryImpl: GetDataRepositoryImpl
+    lateinit var repository: Repository
 
     lateinit var rocketViewModel: RocketViewModel
 
@@ -45,23 +43,17 @@ class RocketsViewModelTest {
 
     @Before
     fun setup(){
-
-
-
-        rocketViewModel = RocketViewModel(getDataRepositoryImpl)
+        rocketViewModel = RocketViewModel(repository)
 
         rocketViewModel.returnAllRocketsResult().observeForever(allRocketMutableData)
         rocketViewModel.returnProgressBarValue().observeForever(progressBarMutableData)
         rocketViewModel.returnError().observeForever(errorMutableData)
-
     }
 
     private val rocket_name = "Falcon Heavy"
     private val engines_count = 9
     private val country = "United States"
     private val active = true
-
-   // val expectedRockets = mutableListOf<Rockets>(Rockets(true, "United States", engines, "Falcon Heavy" ))
 
 
     @Test
@@ -70,7 +62,7 @@ class RocketsViewModelTest {
 
         val rockets = mutableListOf(Rockets(active, country, engines, rocket_name))
 
-        `when`(getDataRepositoryImpl.getRocketRepositoriesMethod()).thenReturn(Single.just(rockets))
+        `when`(repository.getRocketRepositoriesMethod()).thenReturn(Single.just(rockets))
 
         rocketViewModel.getAllRocketsData()
 
@@ -86,7 +78,7 @@ class RocketsViewModelTest {
 
         val error = "Error Message"
 
-        `when`(getDataRepositoryImpl.getRocketRepositoriesMethod()).thenReturn(Single.error(RuntimeException(error)))
+        `when`(repository.getRocketRepositoriesMethod()).thenReturn(Single.error(RuntimeException(error)))
 
         rocketViewModel.getAllRocketsData()
 
