@@ -73,13 +73,13 @@ class RocketsActivity : AppCompatActivity() {
         swipeRefreshLayout.setOnRefreshListener {
 
             viewModel.getRockets()
-            Toast.makeText(this, "Swipe called", Toast.LENGTH_SHORT).show()
             swipeRefreshLayout.isRefreshing = false
         }
 
         rgFilters.setOnCheckedChangeListener { _, checkedId ->
             viewModel.getRockets(checkedId == R.id.rbActiveRockets)
         }
+
         btnRetry.setOnClickListener {
             viewModel.getRockets(rbActiveRockets.isChecked)
         }
@@ -105,7 +105,7 @@ class RocketsActivity : AppCompatActivity() {
         {
             setTitle(R.string.dialog_title)
             setMessage(R.string.dialog_message)
-            setNegativeButton("OK") { dialog, _ -> dialog.dismiss()
+            setNegativeButton(R.string.ok_message) { dialog, _ -> dialog.dismiss()
             }
             show()
         }

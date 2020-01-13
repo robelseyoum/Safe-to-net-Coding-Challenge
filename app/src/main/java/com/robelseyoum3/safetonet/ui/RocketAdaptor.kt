@@ -26,8 +26,7 @@ class RocketAdaptor(private val allRocket: List<Rockets>) : RecyclerView.Adapter
 
         holder.rocketName.text = allRocket[position].rocketName
         holder.rocketCountry.text = allRocket[position].country
-        holder.rocketEngineCount.text = allRocket[position].engines.number.toString() //not sure with the request data
-        //allRocket[position].active
+        holder.rocketEngineCount.text = allRocket[position].engines.number.toString()
 
     }
 

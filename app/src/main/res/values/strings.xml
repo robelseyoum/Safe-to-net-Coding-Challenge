@@ -12,5 +12,7 @@
     <string name="all_rockets">All Rockets</string>
     <string name="active_rockets">Active Rockets</string>
 
+    <string name="ok_message">Ok</string>
+
 
 </resources>
