@@ -51,20 +51,19 @@ class RocketsViewModelTest {
     }
 
     private val rocket_name = "Falcon Heavy"
-    private val engines_count = 9
     private val country = "United States"
     private val active = true
 
 
     @Test
     fun getRockets_with_success(){
-        `when`(engines.number).thenReturn(engines_count)
+
 
         val rockets = mutableListOf(Rockets(active, country, engines, rocket_name))
 
         `when`(repository.getRocketRepositoriesMethod()).thenReturn(Single.just(rockets))
 
-        rocketViewModel.getAllRocketsData()
+        rocketViewModel.getRockets(false)
 
         verify(allRocketMutableData, times(1)).onChanged(rockets)
         verify(progressBarMutableData, times(1)).onChanged(true)
@@ -73,14 +72,28 @@ class RocketsViewModelTest {
     }
 
     @Test
+    fun getRockets_with_activeOnly_with_success(){
+
+        val rockets = mutableListOf(Rockets(false, country, engines, rocket_name))
+
+        `when`(repository.getRocketRepositoriesMethod()).thenReturn(Single.just(rockets))
+
+        rocketViewModel.getRockets(true)
+
+        verify(allRocketMutableData, times(1)).onChanged(emptyList())
+        verify(progressBarMutableData, times(1)).onChanged(true)
+        verify(errorMutableData, times(0)).onChanged(false)
+
+    }
+
+    @Test
     fun getRockets_ReturnError() {
-        `when`(engines.number).thenReturn(engines_count)
 
         val error = "Error Message"
 
         `when`(repository.getRocketRepositoriesMethod()).thenReturn(Single.error(RuntimeException(error)))
 
-        rocketViewModel.getAllRocketsData()
+        rocketViewModel.getRockets(false)
 
         verify(allRocketMutableData, times(0)).onChanged(ArgumentMatchers.anyList())
 

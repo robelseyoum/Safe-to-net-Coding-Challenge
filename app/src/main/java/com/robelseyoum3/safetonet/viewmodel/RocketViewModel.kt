@@ -21,24 +21,29 @@ class RocketViewModel (private val repository: Repository) : ViewModel() {
 
 
 
-     fun getRockets(isActiveOnly: Boolean = false) {
+    fun getRockets(isActiveOnly: Boolean = false) {
 
         compositeDisposable.add(
 
             repository.getRocketRepositoriesMethod()
                 .doOnSubscribe { progressbarMutableData.postValue(true) }
                 .doOnError { progressbarMutableData.value = false }
-                .map { it -> if(isActiveOnly) { it.filter { it.active } } else { it } }
+                .map { allRockets ->
+                    if (isActiveOnly) {
+                        allRockets.filter { rocket -> rocket.active }
+                    } else {
+                        allRockets
+                    }
+                }
                 .subscribe(
-                    {
-                            rockets -> allRocketsMutableData.value =  rockets
-                            progressbarMutableData.value = false
+                    { rockets ->
+                        allRocketsMutableData.value = rockets
+                        progressbarMutableData.value = false
                     },
                     {
-                            errorMutableData.value = true
+                        errorMutableData.value = true
                     }
                 )
-
         )
     }
 

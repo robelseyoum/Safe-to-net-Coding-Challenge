@@ -5,44 +5,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.MainActivity">
+    tools:context=".ui.RocketsActivity">
 
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:contentDescription="@string/search"
-        app:layout_constraintBottom_toTopOf="@+id/swipe_refresh_layout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_search_black_24dp" />
-
-
-    <Button
-        android:id="@+id/activeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Press For Active Rockets" />
 
     <RadioGroup
+        android:id="@+id/rgFilters"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <RadioButton
+            android:id="@+id/rbAllRockets"
+            android:checked="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/allRockets"
-            />
+            android:text="@string/all_rockets" />
 
         <RadioButton
+            android:id="@+id/rbActiveRockets"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/activeRocketOnly"/>
+            android:text="@string/active_rockets" />
 
 
     </RadioGroup>
@@ -54,7 +39,7 @@
         android:layout_marginTop="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton">
+        app:layout_constraintTop_toBottomOf="@+id/rgFilters">
 
 
         <androidx.recyclerview.widget.RecyclerView

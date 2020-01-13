@@ -9,6 +9,8 @@
     <string name="name">Name</string>
     <string name="country">Country</string>
     <string name="search">search</string>
+    <string name="all_rockets">All Rockets</string>
+    <string name="active_rockets">Active Rockets</string>
 
 
 </resources>
