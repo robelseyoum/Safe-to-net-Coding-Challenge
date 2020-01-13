@@ -20,26 +20,28 @@ class RocketViewModel (private val repository: Repository) : ViewModel() {
     private var compositeDisposable = CompositeDisposable() //we can add several observable
 
 
-    fun getAllRocketsData() {
 
+     fun getRockets(isActiveOnly: Boolean = false) {
 
         compositeDisposable.add(
 
             repository.getRocketRepositoriesMethod()
                 .doOnSubscribe { progressbarMutableData.postValue(true) }
                 .doOnError { progressbarMutableData.value = false }
-               // .map { it -> it.filter { it.active } }
+                .map { it -> if(isActiveOnly) { it.filter { it.active } } else { it } }
                 .subscribe(
                     {
-                        rockets -> allRocketsMutableData.value = rockets
-                        progressbarMutableData.value = false
+                            rockets -> allRocketsMutableData.value =  rockets
+                            progressbarMutableData.value = false
                     },
                     {
-                        errorMutableData.value = true
+                            errorMutableData.value = true
                     }
                 )
+
         )
     }
+
 
     fun returnAllRocketsResult() = allRocketsMutableData
 

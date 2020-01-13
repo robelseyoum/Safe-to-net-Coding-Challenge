@@ -8,6 +8,7 @@
     <string name="engine_count">Engine Count</string>
     <string name="name">Name</string>
     <string name="country">Country</string>
+    <string name="search">search</string>
 
 
 </resources>

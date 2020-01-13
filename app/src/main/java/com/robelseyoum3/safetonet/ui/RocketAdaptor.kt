@@ -3,6 +3,8 @@ package com.robelseyoum3.safetonet.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.robelseyoum3.safetonet.R
@@ -10,6 +12,7 @@ import com.robelseyoum3.safetonet.model.Rockets
 import kotlinx.android.synthetic.main.rockets_rows.view.*
 
 class RocketAdaptor(private val allRocket: List<Rockets>) : RecyclerView.Adapter<RocketAdaptor.RocketViewHolder>(){
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RocketViewHolder {
         return RocketViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.rockets_rows, parent, false))
@@ -24,6 +27,7 @@ class RocketAdaptor(private val allRocket: List<Rockets>) : RecyclerView.Adapter
         holder.rocketName.text = allRocket[position].rocketName
         holder.rocketCountry.text = allRocket[position].country
         holder.rocketEngineCount.text = allRocket[position].engines.number.toString() //not sure with the request data
+        //allRocket[position].active
 
     }
 
@@ -35,5 +39,6 @@ class RocketAdaptor(private val allRocket: List<Rockets>) : RecyclerView.Adapter
         val rocketEngineCount: TextView = view.tvEngineCountDisplay
 
     }
+
 
 }

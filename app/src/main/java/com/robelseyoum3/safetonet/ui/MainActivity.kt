@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
 
         viewModel = ViewModelProviders.of(this, rocketViewModelFactory).get(RocketViewModel::class.java)
 
-        viewModel.getAllRocketsData()
+        viewModel.getRockets()
 
         viewModel.returnAllRocketsResult().observe(this,
             Observer<List<Rockets>> {
@@ -75,14 +75,18 @@ class MainActivity : AppCompatActivity() {
 
         swipeRefreshLayout.setOnRefreshListener {
 
-            viewModel.getAllRocketsData()
+            viewModel.getRockets()
             Toast.makeText(this, "Swipe called", Toast.LENGTH_SHORT).show()
             swipeRefreshLayout.isRefreshing = false
         }
 
-        btnRetry.setOnClickListener {
-            viewModel.getAllRocketsData()
+        imageButton.setOnClickListener{
+            viewModel.getRockets(true)
         }
+
+//        btnRetry.setOnClickListener {
+//            viewModel.getActiveRockets()
+//        }
 
     }
 
