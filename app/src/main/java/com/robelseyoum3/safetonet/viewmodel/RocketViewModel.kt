@@ -28,7 +28,7 @@ class RocketViewModel (private val repository: Repository) : ViewModel() {
             repository.getRocketRepositoriesMethod()
                 .doOnSubscribe { progressbarMutableData.postValue(true) }
                 .doOnError { progressbarMutableData.value = false }
-                .map { it -> it.filter { it.active } }
+               // .map { it -> it.filter { it.active } }
                 .subscribe(
                     {
                         rockets -> allRocketsMutableData.value = rockets
